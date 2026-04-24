@@ -11,11 +11,11 @@
   }
 
   function makeDots() {
-    return Array.from({ length: 55 }, () => ({
+    return Array.from({ length: 60 }, () => ({
       x: Math.random() * W,
       y: Math.random() * H,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.25,
+      vx: (Math.random() - 0.5) * 0.28,
+      vy: (Math.random() - 0.5) * 0.28,
     }));
   }
 
@@ -34,10 +34,10 @@
         const dx = dots[i].x - dots[j].x;
         const dy = dots[i].y - dots[j].y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
+        if (dist < 145) {
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(160,160,200,${(1 - dist / 150) * 0.22})`;
-          ctx.lineWidth = 0.8;
+          ctx.strokeStyle = `rgba(140, 130, 180, ${(1 - dist / 145) * 0.28})`;
+          ctx.lineWidth = 0.7;
           ctx.moveTo(dots[i].x, dots[i].y);
           ctx.lineTo(dots[j].x, dots[j].y);
           ctx.stroke();
@@ -47,8 +47,8 @@
 
     dots.forEach(d => {
       ctx.beginPath();
-      ctx.arc(d.x, d.y, 1.5, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(160,160,210,0.45)';
+      ctx.arc(d.x, d.y, 1.8, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(140, 130, 200, 0.5)';
       ctx.fill();
     });
 
@@ -58,11 +58,7 @@
   resize();
   dots = makeDots();
   draw();
-
-  window.addEventListener('resize', () => {
-    resize();
-    dots = makeDots();
-  });
+  window.addEventListener('resize', () => { resize(); dots = makeDots(); });
 })();
 
 // ── Mobile nav toggle ──────────────────────────────────────────────────
@@ -75,7 +71,6 @@ if (toggle && navRight) {
     toggle.textContent = open ? '✕' : '☰';
     document.body.style.overflow = open ? 'hidden' : '';
   });
-
   navRight.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       navRight.classList.remove('open');
@@ -83,7 +78,6 @@ if (toggle && navRight) {
       document.body.style.overflow = '';
     });
   });
-
   document.addEventListener('click', e => {
     if (!e.target.closest('nav') && navRight.classList.contains('open')) {
       navRight.classList.remove('open');
@@ -93,12 +87,30 @@ if (toggle && navRight) {
   });
 }
 
-// ── Nav shadow on scroll ───────────────────────────────────────────────
-const nav = document.querySelector('nav');
-if (nav) {
-  window.addEventListener('scroll', () => {
-    nav.style.boxShadow = window.scrollY > 10
-      ? '0 2px 16px rgba(0,0,0,0.06)'
-      : 'none';
-  }, { passive: true });
+// ── Scroll reveal ──────────────────────────────────────────────────────
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.08, rootMargin: '0px 0px -32px 0px' }
+  );
+
+  document.querySelectorAll('.reveal, .work-item, .story-item, .edu-card').forEach((el, i) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = `${(i % 5) * 0.07}s`;
+    observer.observe(el);
+  });
 }
+
+// ── Active nav link ────────────────────────────────────────────────────
+const page = window.location.pathname.split('/').pop() || 'index.html';
+document.querySelectorAll('.nav-right a').forEach(a => {
+  const href = a.getAttribute('href');
+  if (href === page || (page === '' && href === 'index.html')) {
+    a.style.textDecoration = 'underline';
+  }
+});
