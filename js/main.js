@@ -78,14 +78,15 @@ const greetEl = document.getElementById('greeting-text');
 if (greetEl) {
   const text = 'Welcome to my little corner on the Internet.';
   const cursor = greetEl.querySelector('.cursor');
-  let i = 0;
+  const textSpan = document.createElement('span');
   greetEl.innerHTML = '';
+  greetEl.appendChild(textSpan);
   greetEl.appendChild(cursor);
+  let i = 0;
 
   function type() {
     if (i <= text.length) {
-      const typed = document.createTextNode(text.slice(0, i));
-      greetEl.insertBefore(typed, cursor);
+      textSpan.textContent = text.slice(0, i);
       i++;
       setTimeout(type, i === 1 ? 600 : 38 + Math.random() * 22);
     }
