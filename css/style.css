@@ -250,6 +250,68 @@ a:hover { text-decoration: underline; }
 .work-role { font-size: 0.83rem; color: var(--muted); font-style: italic; margin-bottom: 10px; }
 .work-desc { font-size: 0.875rem; line-height: 1.8; color: #333; }
 
+.work-subsection {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-top: 18px;
+  margin-bottom: 8px;
+}
+
+.work-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.work-bullets > li {
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: #333;
+  padding-left: 18px;
+  position: relative;
+}
+
+.work-bullets > li::before {
+  content: '●';
+  position: absolute;
+  left: 0;
+  font-size: 0.45rem;
+  top: 7px;
+  color: var(--muted);
+}
+
+.work-sub-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.work-sub-bullets li {
+  font-size: 0.83rem;
+  line-height: 1.7;
+  color: #555;
+  padding-left: 16px;
+  position: relative;
+}
+
+.work-sub-bullets li::before {
+  content: '○';
+  position: absolute;
+  left: 0;
+  font-size: 0.5rem;
+  top: 6px;
+  color: #bbb;
+}
+
 /* ── WORDS PAGE ───────────────────────────────────── */
 .story-list { display: flex; flex-direction: column; }
 
