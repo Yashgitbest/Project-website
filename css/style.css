@@ -312,6 +312,31 @@ a:hover { text-decoration: underline; }
   color: #bbb;
 }
 
+/* ── EDUCATION DIVIDER ────────────────────────────── */
+.edu-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 64px 0 0;
+}
+
+.edu-divider::before,
+.edu-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.edu-divider-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
 /* ── WORDS PAGE ───────────────────────────────────── */
 .story-list { display: flex; flex-direction: column; }
 
