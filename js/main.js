@@ -34,7 +34,7 @@
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 140) {
           ctx.beginPath();
-          ctx.strokeStyle = `rgba(180, 180, 180, ${(1 - dist / 140) * 0.12})`;
+          ctx.strokeStyle = `rgba(60, 60, 60, ${(1 - dist / 140) * 0.08})`;
           ctx.lineWidth = 0.5;
           ctx.moveTo(dots[i].x, dots[i].y);
           ctx.lineTo(dots[j].x, dots[j].y);
@@ -45,7 +45,7 @@
     dots.forEach(d => {
       ctx.beginPath();
       ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(200, 200, 200, 0.35)';
+      ctx.fillStyle = 'rgba(40, 40, 40, 0.25)';
       ctx.fill();
     });
     requestAnimationFrame(draw);
