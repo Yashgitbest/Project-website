@@ -57,22 +57,6 @@
   window.addEventListener('resize', () => { resize(); dots = makeDots(); });
 })();
 
-// ── Sun parallax on mouse move ─────────────────────────────────────────
-const sunOrb = document.getElementById('sun-orb');
-if (sunOrb) {
-  let tx = 0, ty = 0, cx = 0, cy = 0;
-  document.addEventListener('mousemove', e => {
-    tx = (e.clientX / window.innerWidth  - 0.5) * -28;
-    ty = (e.clientY / window.innerHeight - 0.5) * -28;
-  });
-  (function animateSun() {
-    cx += (tx - cx) * 0.06;
-    cy += (ty - cy) * 0.06;
-    sunOrb.style.transform = `translate(${cx}px, ${cy}px)`;
-    requestAnimationFrame(animateSun);
-  })();
-}
-
 // ── Typewriter on homepage greeting ───────────────────────────────────
 const greetEl = document.getElementById('greeting-text');
 if (greetEl) {
