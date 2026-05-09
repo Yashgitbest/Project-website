@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
+  <script>
+    (function () {
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('theme') || 'light';
+      } catch (_) {}
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Work — Yash Jain</title>
-  <meta name="description" content="Work and experience — Yash Jain. Roland Berger, General Catalyst, BCG, HealthQuad." />
+  <meta name="description" content="Yash Jain's professional experience and education." />
 
   <!-- Open Graph -->
   <meta property="og:type"        content="website" />
@@ -17,172 +24,112 @@
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
-<body>
-
-  <canvas id="bg-canvas"></canvas>
+<body data-page="work">
 
   <!-- ═══ NAV ═══ -->
-  <nav>
-    <div class="nav-name"><a href="index.html">Yash Jain</a></div>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">☰</button>
-    <div class="nav-right" id="nav-right">
-      <a href="index.html" class="c-orange">Home</a>
-      <a href="work.html" class="c-gold active">Work</a>
-      <a href="words.html" class="c-purple">Words</a>
-      <a href="https://www.linkedin.com/in/yash-jain-02a8b918b/" target="_blank" rel="noopener" class="c-indigo nav-icon" title="LinkedIn">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">Yash Jain</a>
+
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="index.html"  data-nav="home">Home</a>
+        <a href="work.html"   data-nav="work">Work</a>
+        <a href="words.html"  data-nav="words">Words</a>
+        <a href="https://www.linkedin.com/in/yash-jain-02a8b918b/"
+          target="_blank" rel="noopener noreferrer"
+          class="nav-icon-link" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+            <rect x="2" y="9" width="4" height="12"/>
+            <circle cx="4" cy="4" r="2"/>
+          </svg>
+        </a>
+      </div>
+
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1"  x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22"   x2="5.64"  y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1"  y1="12" x2="3"  y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22"  y1="19.78" x2="5.64"  y2="18.36"/>
+          <line x1="18.36" y1="5.64"  x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 
-  <!-- ═══ WORK PAGE ═══ -->
-  <main class="page-main">
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html"  data-nav="home">Home</a>
+    <a href="work.html"   data-nav="work">Work</a>
+    <a href="words.html"  data-nav="words">Words</a>
+    <a href="https://www.linkedin.com/in/yash-jain-02a8b918b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
 
-    <div class="page-header">
-      <h1 class="page-title">Work</h1>
-      <p class="page-subtitle">Things I've done, places I've been, roles I've held.</p>
-    </div>
+  <!-- ═══ MAIN ═══ -->
+  <main>
+    <div class="container">
 
-    <div class="work-list">
-
-      <!-- ── Roland Berger ── -->
-      <div class="work-item">
-        <div class="work-header">
-          <a href="https://www.rolandberger.com" target="_blank" rel="noopener" class="work-company c-gold">Roland Berger ↗</a>
-          <span class="work-period">Oct 2025 – Present</span>
-        </div>
-        <p class="work-role">Consultant (Client Facing) · Gurgaon · Engagements across Insurance, Automotive, Airports, FMCG</p>
-
-        <p class="work-subsection">Key Engagements</p>
-        <ul class="work-bullets">
-          <li>
-            <strong>P&amp;L Improvement:</strong> Conceptualized, strategized, and implemented growth levers to scale vehicle business by INR 200 Cr
-            <ul class="work-sub-bullets">
-              <li>Strategized 40+ growth initiatives with senior clients from 6+ teams across sourcing, valuation and budgeting</li>
-              <li>Spearheaded approval of 10+ products and policy changes from the Board for the first time in the latest 5 years</li>
-            </ul>
-          </li>
-          <li><strong>Organisational Structure:</strong> Spearheaded workforce augmentation for a large scale FMCG manufacturer</li>
-          <li>
-            <strong>Due Diligence:</strong> Evaluated and advised on the acquisition of a TPA by a large insurer in the Middle East
-            <ul class="work-sub-bullets">
-              <li>B-plan build up, assessment of verticals such as auctions, road side assistance, spare parts and repair</li>
-            </ul>
-          </li>
-        </ul>
-
-        <p class="work-subsection">Stakeholder Management</p>
-        <ul class="work-bullets">
-          <li>Engaged with 5 CXOs &amp; 10+ CXO -1 &amp; 2s on a weekly basis for alignment, strategy and implementation of initiatives</li>
-          <li>Trained 5+ clients to operate automated models &amp; reporting dashboards (our IP) to sustainably continue initiatives</li>
-        </ul>
+      <div class="page-header">
+        <h1 class="section-title">Work</h1>
+        <p class="section-subtitle">Things I've done, places I've been, roles I've held.</p>
+        <a href="resume.pdf" download class="btn-download">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download CV
+        </a>
       </div>
 
-      <!-- ── General Catalyst ── -->
-      <div class="work-item">
-        <div class="work-header">
-          <a href="https://www.generalcatalyst.com" target="_blank" rel="noopener" class="work-company c-orange">General Catalyst ↗</a>
-          <span class="work-period">Jun 2025 – Sep 2025</span>
-        </div>
-        <p class="work-role">Intern (SVP) · Investment Team · Bangalore · 3 months</p>
-
-        <ul class="work-bullets">
-          <li>Evaluated multiple start-ups across Fin-Tech, Health Tech, Manufacturing and Fashion for early stage deals worth $5M</li>
-          <li>Sourced 100+ start-ups for evaluation; built a thesis on single specialty hospitals for early stage investing</li>
-        </ul>
+      <div class="timeline-group-label">Experience</div>
+      <div class="timeline" id="experienceTimeline">
+        <p class="loading">Loading…</p>
       </div>
 
-      <!-- ── BCG ── -->
-      <div class="work-item">
-        <div class="work-header">
-          <a href="https://www.bcg.com" target="_blank" rel="noopener" class="work-company c-green">Boston Consulting Group (BCG) ↗</a>
-          <span class="work-period">2021 – 2023</span>
-        </div>
-        <p class="work-role">Analyst (Client Facing) · Private Equity &amp; Principal Investors · Gurgaon · 18 months</p>
+      <div class="divider"></div>
 
-        <p class="work-subsection">Key Achievements</p>
-        <ul class="work-bullets">
-          <li>Among top 5% analysts to get an outstanding 5/5 rating in 3 cases; Youngest (out of 40) analysts across Asia region</li>
-          <li>Fastest promotion across teams from Junior Specialist to Analyst (12 months vs 36 months) in the PE practice</li>
-        </ul>
-
-        <p class="work-subsection">Key Engagements</p>
-        <ul class="work-bullets">
-          <li><strong>CDD:</strong> Assisted $5Bn PE fund investing in retail payments (USA), spearheaded voice of customers analysis</li>
-          <li><strong>CDD:</strong> Assessed workforce for a $3Bn PE fund investing in an IT services provider, projected a 10% reduction in attrition</li>
-          <li>Led the creation of a GitHub loop focused on use cases in technology DDs; adopted widely in global cases across BCG</li>
-        </ul>
+      <div class="timeline-group-label">Education</div>
+      <div class="timeline" id="educationTimeline">
+        <p class="loading">Loading…</p>
       </div>
 
-      <!-- ── HealthQuad ── -->
-      <div class="work-item">
-        <div class="work-header">
-          <a href="https://healthquad.in" target="_blank" rel="noopener" class="work-company c-purple">HealthQuad VC ↗</a>
-          <span class="work-period">2023</span>
-        </div>
-        <p class="work-role">Management Trainee · Investment Team · Delhi · 6 months</p>
-
-        <p class="work-subsection">Deal Evaluation</p>
-        <ul class="work-bullets">
-          <li>Part of $10M investment in a chronic disease management company; deal evaluation, due diligence, business plan</li>
-          <li>Evaluated a deal worth $8M in the eyewear space; conducted due diligence, customer review, sentiment analysis</li>
-        </ul>
-      </div>
+      <div style="height: clamp(3rem, 6vw, 5rem)"></div>
 
     </div>
-
-    <!-- ═══ EDUCATION ═══ -->
-    <div class="edu-divider">
-      <span class="edu-divider-label">Education</span>
-    </div>
-
-    <div class="work-list">
-
-      <!-- ── IIM Ahmedabad ── -->
-      <div class="work-item">
-        <div class="work-header">
-          <span class="work-company c-red">IIM Ahmedabad</span>
-          <span class="work-period">Jun 2023 – Apr 2025</span>
-        </div>
-        <p class="work-role">PGP (MBA) · GPA: 3.636 · Top 5% of the batch (I-Schol) · CAT: 99.95%ile</p>
-
-        <ul class="work-bullets">
-          <li>Awarded the <strong>Dun &amp; Bradstreet Merit Industry Scholarship</strong> for Rank 11 in Second Year</li>
-          <li>Awarded the <strong>PGP 2001 Merit Scholarship</strong> for Rank 29 in First Year; Overall Rank 18/402 (Top 5%)</li>
-          <li>Part of Venture Capital Club, Theatre Society, Writing and Debating Cell; Exchange program: IESEG, France</li>
-          <li>Intern: TransformationX Consulting (Dubai, UAE) — Among 2% of 400+ to receive a foreign internship offer</li>
-        </ul>
-      </div>
-
-      <!-- ── SSCBS ── -->
-      <div class="work-item">
-        <div class="work-header">
-          <span class="work-company c-teal">Shaheed Sukhdev College of Business Studies, University of Delhi</span>
-          <span class="work-period">Jul 2018 – Jun 2021</span>
-        </div>
-        <p class="work-role">BMS (Bachelors of Management Studies) · CGPA: 9.041 · Top 5% across DU</p>
-
-        <ul class="work-bullets">
-          <li>Cleared CFA L1; 99%ile in DU's Joint Admission Test; Top 1% in JEE Mains 2018</li>
-          <li>Vice President, CBS Debating Society; Led the society to the title of 'Best DebSoc' by DU Beat for 2 years</li>
-        </ul>
-      </div>
-
-    </div>
-
   </main>
 
+  <!-- ═══ FOOTER ═══ -->
   <footer>
-    © 2025 Yash Jain
+    <span class="footer-name">Yash Jain</span>
     <div class="footer-links">
       <a href="index.html">Home</a>
+      <a href="work.html">Work</a>
       <a href="words.html">Words</a>
-      <a href="https://www.linkedin.com/in/yash-jain-02a8b918b/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:your@email.com">Email</a>
+      <a href="https://www.linkedin.com/in/yash-jain-02a8b918b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
+    <span class="footer-copy">© <span id="footerYear"></span> Yash Jain. All rights reserved.</span>
   </footer>
 
   <script src="js/main.js"></script>
